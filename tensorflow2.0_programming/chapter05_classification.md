@@ -1,4 +1,4 @@
-# chapter04 분류
+# chapter05 분류
 - 와인 데이터세트를 기반으로 레드 와인/화이트 와인 여부를 구분하는 분류 모델을 만들어보자
 - 해당 데이터는 케라스와 텐서플로에 탑재되어 있지 않기 때문에 외부에서 데이터를 불러오고 정제하는 과정을 거쳐야 함
 ~~~python
@@ -283,3 +283,28 @@ model.summary()
 - `sparse_categorical_crossentropy` 를 쓰면 별도의 데이터 전처리 없이 희소 행렬을 나타내는 데이터를 정답 행렬로 사용할 수 있음
 - `Flatten`이라는 레이어를 사용하여 2차원 array를 -> 1차원으로 변환
 - Adam의 learing Rate를 따로 지정하지 않음. 기본 default 값은 0.001
+
+~~~python
+# 6. loss, val_loss, accuracy, val_accuracy 그래프로 확인
+import matplotlib.pyplot as plt
+plt.figure(figsize=(12, 4))
+plt.subplot(1, 2, 1)
+plt.plot(history.history['loss'], 'b-', label = 'loss')
+plt.plot(history.history['val_loss'], 'r--', label = 'val_loss')
+plt.xlabel('Epoch')
+plt.legend()
+
+plt.subplot(1, 2, 2)
+
+plt.plot(history.history['accuracy'], 'g-', label = 'accuracy')
+plt.plot(history.history['val_accuracy'], 'k--', label = 'val_accuracy')
+plt.xlabel('Epoch')
+
+plt.ylim (0.7, 1)
+plt.legend()
+
+plt.show()
+
+# 7. 분류 모델 평가
+model.evaluate(test_X, test_Y)
+~~~
